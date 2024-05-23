@@ -2,10 +2,10 @@ package mysql
 
 import (
 	"fmt"
+	"github.com/15733012783/weikang/nacos"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
-	"weikang_database/nacos"
 )
 
 func inItMysql(c func(db *gorm.DB) (interface{}, error)) (interface{}, error) {

@@ -2,6 +2,7 @@ package nacos
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/nacos-group/nacos-sdk-go/clients"
 	"github.com/nacos-group/nacos-sdk-go/common/constant"
 	"github.com/nacos-group/nacos-sdk-go/vo"
@@ -122,6 +123,7 @@ func ClientNaCos(dataid, group, host, NamespaceId string) {
 	}
 	err = json.Unmarshal([]byte(cos), &ApiNac)
 	if err != nil {
+		fmt.Println(err)
 		return
 	}
 }

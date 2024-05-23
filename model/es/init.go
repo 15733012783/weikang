@@ -2,8 +2,8 @@ package es
 
 import (
 	"fmt"
+	"github.com/15733012783/weikang/nacos"
 	"github.com/olivere/elastic/v7"
-	"weikang_database/nacos"
 )
 
 var client *elastic.Client

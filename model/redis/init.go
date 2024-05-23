@@ -1,8 +1,8 @@
 package redis
 
 import (
+	"github.com/15733012783/weikang/nacos"
 	"github.com/go-redis/redis/v8"
-	"weikang_database/nacos"
 )
 
 func InitRedis(callback func(db *redis.Client) (interface{}, error)) (interface{}, error) {
