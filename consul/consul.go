@@ -10,9 +10,9 @@ import (
 	"strconv"
 )
 
-func SonSul(Ghost string, Host string, Port int, Name string) {
+func RegisterConSul(Ghost string, Gport int, Host string, Port int, Name string) {
 	var err error
-	sprintf := fmt.Sprintf("%v:%v", nacos.GoodsT.Grpc.Host, 8500)
+	sprintf := fmt.Sprintf("%v:%v", nacos.GoodsT.Grpc.Host, Gport)
 	ConsulCli, err := api.NewClient(&api.Config{
 		Address: sprintf,
 	})
@@ -44,7 +44,7 @@ func SonSul(Ghost string, Host string, Port int, Name string) {
 
 var currentIndex int
 
-func GetClient(serverName, Address string) (string, error) {
+func GetConSul(serverName, Address string) (string, error) {
 	cc, err := api.NewClient(&api.Config{
 		Address: Address,
 	})
@@ -67,7 +67,7 @@ func GetClient(serverName, Address string) (string, error) {
 	// 获取当前要访问的服务地址
 	selectedService := date[currentIndex]
 	addr := selectedService.Service.Address + ":" + strconv.Itoa(selectedService.Service.Port)
-	fmt.Println(addr, "addr*******************")
+	fmt.Println(addr)
 	return addr, nil
 }
 
