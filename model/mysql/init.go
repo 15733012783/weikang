@@ -5,13 +5,13 @@ import (
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
+	"weikang_database/nacos"
 )
 
-var db *gorm.DB
-var err error
-
 func inItMysql(c func(db *gorm.DB) (interface{}, error)) (interface{}, error) {
-	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local")
+	nac := nacos.RpcNac.Mysql
+	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local",
+		nac.Root, nac.Password, nac.Host, nac.Port, nac.Database)
 	open, err := gorm.Open(mysql.Open(dsn), &gorm.Config{
 		Logger: logger.Default.LogMode(logger.Info),
 	})
@@ -31,11 +31,14 @@ func inItMysql(c func(db *gorm.DB) (interface{}, error)) (interface{}, error) {
 }
 
 func InitTable() {
-	inItMysql(func(db *gorm.DB) (interface{}, error) {
+	_, err := inItMysql(func(db *gorm.DB) (interface{}, error) {
 		err := db.AutoMigrate()
 		if err != nil {
 			return nil, err
 		}
 		return nil, nil
 	})
+	if err != nil {
+		return
+	}
 }

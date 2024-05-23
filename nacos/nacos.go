@@ -30,32 +30,36 @@ type ConfigNaCosRpc struct {
 		Password string `json:"password" yaml:"password"`
 		Db       string `json:"db" yaml:"db"`
 	} `json:"redis" yaml:"redis"`
+	Mongodb struct {
+		Host string `json:"host" yaml:"host"`
+		Port string `json:"port" yaml:"port"`
+	} `json:"mongodb" yaml:"mongodb"`
 }
 
 type ConfigNaCosApi struct {
-	ServerName string `json:"serverName"`
-	Port       int    `json:"port"`
+	ServerName string `json:"serverName" yaml:"serverName"`
+	Port       int    `json:"port" yaml:"port"`
 	Jwt        struct {
-		SigningKey string `json:"signingKey"`
-	} `json:"jwt"`
+		SigningKey string `json:"signingKey" yaml:"signingKey"`
+	} `json:"jwt" yaml:"jwt"`
 	Consul struct {
-		Host string `json:"host"`
-		Port int    `json:"port"`
-	} `json:"consul"`
+		Host string `json:"host" yaml:"host"`
+		Port int    `json:"port" yaml:"port"`
+	} `json:"consul" yaml:"consul"`
 	Rabbitmq struct {
-		Root     string `json:"root"`
-		Password string `json:"password"`
-		Host     string `json:"host"`
-		Port     int    `json:"port"`
-	} `json:"rabbitmq"`
+		Root     string `json:"root" yaml:"root"`
+		Password string `json:"password" yaml:"password"`
+		Host     string `json:"host" yaml:"host"`
+		Port     int    `json:"port" yaml:"port"`
+	} `json:"rabbitmq" yaml:"rabbitmq"`
 	Crypto struct {
-		Key int64 `json:"key"`
-	} `json:"crypto"`
+		Key int64 `json:"key" yaml:"key"`
+	} `json:"crypto" yaml:"crypto"`
 	Ali struct {
-		AccessKeyID     string `json:"AccessKey_ID"`
-		AccessKeySecret string `json:"AccessKey_Secret"`
-		Endpoint        string `json:"endpoint"`
-	} `json:"ali"`
+		AccessKeyID     string `json:"AccessKey_ID" yaml:"accessKeyID"`
+		AccessKeySecret string `json:"AccessKey_Secret" yaml:"accessKeySecret"`
+		Endpoint        string `json:"endpoint" yaml:"endpoint"`
+	} `json:"ali" yaml:"ali"`
 }
 
 func NaCos(DataId, Group, ip string, NamespaceId string) (string, error) {
@@ -96,27 +100,27 @@ func NaCos(DataId, Group, ip string, NamespaceId string) (string, error) {
 	return config, nil
 }
 
-var ServiceNac ConfigNaCosRpc
+var RpcNac ConfigNaCosRpc
 
 func ServiceNaCos(dataid, group, host, NamespaceId string) {
 	cos, err := NaCos(dataid, group, host, NamespaceId)
 	if err != nil {
 		return
 	}
-	err = json.Unmarshal([]byte(cos), &ServiceNac)
+	err = json.Unmarshal([]byte(cos), &RpcNac)
 	if err != nil {
 		return
 	}
 }
 
-var ClientNac ConfigNaCosApi
+var ApiNac ConfigNaCosApi
 
 func ClientNaCos(dataid, group, host, NamespaceId string) {
 	cos, err := NaCos(dataid, group, host, NamespaceId)
 	if err != nil {
 		return
 	}
-	err = json.Unmarshal([]byte(cos), &ClientNac)
+	err = json.Unmarshal([]byte(cos), &ApiNac)
 	if err != nil {
 		return
 	}
