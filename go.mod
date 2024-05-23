@@ -1,4 +1,4 @@
-module weikang_database
+module github.com/15733012783/weikang
 
 go 1.20
 
