@@ -28,3 +28,8 @@ type User struct {
 	Email    string //
 	Phone    string //电话
 }
+type Score struct {
+	Id       int    //ID
+	UserId int //用户id
+	Score int //积分
+}
