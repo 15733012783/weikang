@@ -23,10 +23,10 @@ import (
  */
 
 var (
-	hostUrl   = nacos.RpcNac.Chatgpt.HostUrl
-	appid     = nacos.RpcNac.Chatgpt.Appid
-	apiSecret = nacos.RpcNac.Chatgpt.ApiSecret
-	apiKey    = nacos.RpcNac.Chatgpt.ApiKey
+	hostUrl   = nacos.ApiNac.Chatgpt.HostUrl
+	appid     = nacos.ApiNac.Chatgpt.Appid
+	apiSecret = nacos.ApiNac.Chatgpt.ApiSecret
+	apiKey    = nacos.ApiNac.Chatgpt.ApiKey
 )
 
 func XfChatGrpc(text string) string {
