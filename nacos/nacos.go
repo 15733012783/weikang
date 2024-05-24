@@ -103,27 +103,29 @@ func NaCos(DataId, Group, ip string, NamespaceId string) (string, error) {
 
 var RpcNac ConfigNaCosRpc
 
-func ServiceNaCos(dataid, group, host, NamespaceId string) {
+func ServiceNaCos(dataid, group, host, NamespaceId string) error {
 	cos, err := NaCos(dataid, group, host, NamespaceId)
 	if err != nil {
-		return
+		return err
 	}
 	err = json.Unmarshal([]byte(cos), &RpcNac)
 	if err != nil {
-		return
+		return err
 	}
+	return nil
 }
 
 var ApiNac ConfigNaCosApi
 
-func ClientNaCos(dataid, group, host, NamespaceId string) {
+func ClientNaCos(dataid, group, host, NamespaceId string) error {
 	cos, err := NaCos(dataid, group, host, NamespaceId)
 	if err != nil {
-		return
+		return err
 	}
 	err = json.Unmarshal([]byte(cos), &ApiNac)
 	if err != nil {
 		fmt.Println(err)
-		return
+		return err
 	}
+	return nil
 }
