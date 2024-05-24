@@ -3,7 +3,6 @@ package consul
 import (
 	"errors"
 	"fmt"
-	"github.com/15733012783/mysql/nacos"
 	"github.com/google/uuid"
 	"github.com/hashicorp/consul/api"
 	"log"
@@ -12,7 +11,7 @@ import (
 
 func RegisterConSul(Ghost string, Gport int, Host string, Port int, Name string) {
 	var err error
-	sprintf := fmt.Sprintf("%v:%v", nacos.GoodsT.Grpc.Host, Gport)
+	sprintf := fmt.Sprintf("%v:%v", Host, Port)
 	ConsulCli, err := api.NewClient(&api.Config{
 		Address: sprintf,
 	})
@@ -24,15 +23,15 @@ func RegisterConSul(Ghost string, Gport int, Host string, Port int, Name string)
 	check := &api.AgentServiceCheck{
 		Interval:                       "5s",
 		Timeout:                        "5s",
-		GRPC:                           fmt.Sprintf("%s:%d", Ghost, Port),
+		GRPC:                           fmt.Sprintf("%s:%d", Ghost, Gport),
 		DeregisterCriticalServiceAfter: "30s",
 	}
 	err = ConsulCli.Agent().ServiceRegister(&api.AgentServiceRegistration{
 		ID:      Srvid,
 		Name:    Name,
 		Tags:    []string{"GRPC"},
-		Port:    Port,
-		Address: Host,
+		Port:    Gport,
+		Address: Ghost,
 		Check:   check,
 	})
 	if err != nil {
@@ -72,8 +71,8 @@ func GetConSul(serverName, Address string) (string, error) {
 }
 
 // 服务过滤
-func RegisterConsul(ConsulHost string, ConsulPort int, Host string, Port int, Name string) {
-	sprintf := fmt.Sprintf("%v:%v", nacos.GoodsT.Grpc.Host, 8500)
+func RegisterConsul(Ghost string, Gport int, Host string, Port int, Name string) {
+	sprintf := fmt.Sprintf("%v:%v", Host, Port)
 	client, err := api.NewClient(&api.Config{
 		Address: sprintf,
 	})
@@ -86,7 +85,7 @@ func RegisterConsul(ConsulHost string, ConsulPort int, Host string, Port int, Na
 		Check: &api.AgentServiceCheck{
 			Interval:                       "5s",
 			Timeout:                        "5s",
-			GRPC:                           fmt.Sprintf("%s:%d", Host, Port),
+			GRPC:                           fmt.Sprintf("%s:%d", Ghost, Gport),
 			DeregisterCriticalServiceAfter: "30s",
 		},
 	}
@@ -97,7 +96,7 @@ func RegisterConsul(ConsulHost string, ConsulPort int, Host string, Port int, Na
 	}
 	var BaseSrvAddr string
 	for _, val := range result {
-		if val.Address == fmt.Sprintf("%s:%d", Host, Port) {
+		if val.Address == fmt.Sprintf("%s:%d", Ghost, Gport) {
 			BaseSrvAddr = val.Address
 			log.Println("consul服务已存在")
 			break
