@@ -1,13 +1,10 @@
 package nacos
 
 import (
-	"encoding/json"
-	"fmt"
 	"github.com/nacos-group/nacos-sdk-go/clients"
 	"github.com/nacos-group/nacos-sdk-go/common/constant"
 	"github.com/nacos-group/nacos-sdk-go/vo"
 	"gopkg.in/yaml.v3"
-	"log"
 )
 
 type ConfigNaCosRpc struct {
@@ -88,7 +85,6 @@ func NaCos(DataId, Group, ip string, NamespaceId string) (string, error) {
 		"clientConfig":  clientConfig,
 	})
 	if err != nil {
-		log.Println(err)
 		return "", err
 	}
 	config, err := client.GetConfig(vo.ConfigParam{
@@ -96,7 +92,6 @@ func NaCos(DataId, Group, ip string, NamespaceId string) (string, error) {
 		Group:  Group,
 	})
 	if err != nil {
-		log.Println(err)
 		return "", err
 	}
 	return config, nil
@@ -109,7 +104,7 @@ func ServiceNaCos(dataid, group, host, NamespaceId string) error {
 	if err != nil {
 		return err
 	}
-	err = json.Unmarshal([]byte(cos), &RpcNac)
+	err = yaml.Unmarshal([]byte(cos), &RpcNac)
 	if err != nil {
 		return err
 	}
@@ -125,7 +120,6 @@ func ClientNaCos(dataid, group, host, NamespaceId string) error {
 	}
 	err = yaml.Unmarshal([]byte(cos), &ApiNac)
 	if err != nil {
-		fmt.Println(err)
 		return err
 	}
 	return nil
