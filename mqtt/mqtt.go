@@ -2,6 +2,7 @@ package Mqtt
 
 import (
 	"fmt"
+	"github.com/15733012783/weikang/nacos"
 	mqtt "github.com/eclipse/paho.mqtt.golang"
 	"time"
 )
@@ -23,15 +24,15 @@ var connectLostHandler mqtt.ConnectionLostHandler = func(client mqtt.Client, err
 
 func Mqtt(text interface{}) {
 	// MQTT代理地址和端口
-	var broker = "120.27.208.86"
-	var port = 1883
+	var broker = nacos.ApiNac.Mqtt.Broker
+	var port = nacos.ApiNac.Mqtt.Port
 
 	// 创建MQTT客户端选项
 	opts := mqtt.NewClientOptions()
-	opts.AddBroker(fmt.Sprintf("tcp://%s:%d", broker, port))
-	opts.SetClientID("go_mqtt_client")
-	opts.SetUsername("emqx")
-	opts.SetPassword("public")
+	opts.AddBroker(fmt.Sprintf("tcp://%s:%s", broker, port))
+	opts.SetClientID(nacos.ApiNac.Mqtt.ClientID)
+	opts.SetUsername(nacos.ApiNac.Mqtt.Username)
+	opts.SetPassword(nacos.ApiNac.Mqtt.Password)
 	opts.SetDefaultPublishHandler(messagePubHandler)
 	opts.OnConnect = connectHandler
 	opts.OnConnectionLost = connectLostHandler
