@@ -33,12 +33,6 @@ type ConfigNaCosRpc struct {
 		Host string `json:"host" yaml:"host"`
 		Port string `json:"port" yaml:"port"`
 	} `json:"mongodb" yaml:"mongodb"`
-	Chatgpt struct {
-		HostUrl   string `json:"hostUrl" yaml:"HostUrl"`
-		Appid     string `json:"appid" yaml:"Appid"`
-		ApiSecret string `json:"apiSecret" yaml:"ApiSecret"`
-		ApiKey    string `json:"apiKey" yaml:"ApiKey"`
-	} `json:"chatgpt" yaml:"chatgpt"`
 }
 
 type ConfigNaCosApi struct {
@@ -65,6 +59,19 @@ type ConfigNaCosApi struct {
 		AccessKeySecret string `json:"AccessKey_Secret" yaml:"accessKeySecret"`
 		Endpoint        string `json:"endpoint" yaml:"endpoint"`
 	} `json:"ali" yaml:"ali"`
+	Chatgpt struct {
+		HostUrl   string `json:"hostUrl" yaml:"HostUrl"`
+		Appid     string `json:"appid" yaml:"Appid"`
+		ApiSecret string `json:"apiSecret" yaml:"ApiSecret"`
+		ApiKey    string `json:"apiKey" yaml:"ApiKey"`
+	} `json:"chatgpt" yaml:"chatgpt"`
+	Mqtt struct {
+		Broker   string `json:"Broker" yaml:"Broker"`
+		Port     string `json:"Port" yaml:"Port"`
+		ClientID string `json:"ClientID" yaml:"ClientID"`
+		Username string `json:"Username" yaml:"Username"`
+		Password string `json:"Password" yaml:"Password"`
+	} `json:"mqtt" yaml:"mqtt"`
 }
 
 func NaCos(DataId, Group, ip string, NamespaceId string) (string, error) {
