@@ -33,6 +33,12 @@ type ConfigNaCosRpc struct {
 		Host string `json:"host" yaml:"host"`
 		Port string `json:"port" yaml:"port"`
 	} `json:"mongodb" yaml:"mongodb"`
+	Chatgpt struct {
+		HostUrl   string `json:"hostUrl" yaml:"HostUrl"`
+		Appid     string `json:"appid" yaml:"Appid"`
+		ApiSecret string `json:"apiSecret" yaml:"ApiSecret"`
+		ApiKey    string `json:"apiKey" yaml:"ApiKey"`
+	} `json:"chatgpt" yaml:"chatgpt"`
 }
 
 type ConfigNaCosApi struct {
