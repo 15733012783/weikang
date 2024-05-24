@@ -6,6 +6,7 @@ import (
 	"github.com/nacos-group/nacos-sdk-go/clients"
 	"github.com/nacos-group/nacos-sdk-go/common/constant"
 	"github.com/nacos-group/nacos-sdk-go/vo"
+	"gopkg.in/yaml.v3"
 	"log"
 )
 
@@ -122,7 +123,7 @@ func ClientNaCos(dataid, group, host, NamespaceId string) error {
 	if err != nil {
 		return err
 	}
-	err = json.Unmarshal([]byte(cos), &ApiNac)
+	err = yaml.Unmarshal([]byte(cos), &ApiNac)
 	if err != nil {
 		fmt.Println(err)
 		return err

@@ -3,6 +3,7 @@ module github.com/15733012783/weikang
 go 1.20
 
 require (
+
 	github.com/15733012783/mysql v0.0.0-20240521012948-cba4a99b629f
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/go-redis/redis/v8 v8.11.5
