@@ -8,7 +8,7 @@ import (
 	"gorm.io/gorm/logger"
 )
 
-func inItMysql(c func(db *gorm.DB) (interface{}, error)) (interface{}, error) {
+func InItMysql(c func(db *gorm.DB) (interface{}, error)) (interface{}, error) {
 	nac := nacos.RpcNac.Mysql
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local",
 		nac.Root, nac.Password, nac.Host, nac.Port, nac.Database)
@@ -31,7 +31,7 @@ func inItMysql(c func(db *gorm.DB) (interface{}, error)) (interface{}, error) {
 }
 
 func InitTable() {
-	_, err := inItMysql(func(db *gorm.DB) (interface{}, error) {
+	_, err := InItMysql(func(db *gorm.DB) (interface{}, error) {
 		err := db.AutoMigrate()
 		if err != nil {
 			return nil, err
