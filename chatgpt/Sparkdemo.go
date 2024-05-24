@@ -29,7 +29,7 @@ var (
 	apiKey    = nacos.RpcNac.Chatgpt.ApiKey
 )
 
-func main() {
+func XfChatGrpc(text string) string {
 	// fmt.Println(HmacWithShaTobase64("hmac-sha256", "hello\nhello", "hello"))
 	// st := time.Now()
 	d := websocket.Dialer{
@@ -39,14 +39,14 @@ func main() {
 	conn, resp, err := d.Dial(assembleAuthUrl1(hostUrl, apiKey, apiSecret), nil)
 	if err != nil {
 		panic(readResp(resp) + err.Error())
-		return
+		return ""
 	} else if resp.StatusCode != 101 {
 		panic(readResp(resp) + err.Error())
 	}
 
 	go func() {
 
-		data := genParams1(appid, "你是谁，可以干什么？")
+		data := genParams1(appid, text)
 		conn.WriteJSON(data)
 
 	}()
@@ -64,7 +64,7 @@ func main() {
 		err1 := json.Unmarshal(msg, &data)
 		if err1 != nil {
 			fmt.Println("Error parsing JSON:", err)
-			return
+			return ""
 		}
 		fmt.Println(string(msg))
 		//解析数据
@@ -75,7 +75,7 @@ func main() {
 
 		if code != 0 {
 			fmt.Println(data["payload"])
-			return
+			return ""
 		}
 		status := choices["status"].(float64)
 		fmt.Println(status)
@@ -99,6 +99,7 @@ func main() {
 	fmt.Println(answer)
 
 	time.Sleep(1 * time.Second)
+	return answer
 }
 
 // 生成参数
