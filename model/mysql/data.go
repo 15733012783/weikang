@@ -1,5 +1,7 @@
 package mysql
 
+import "gorm.io/gorm"
+
 type Device struct {
 	Id       int    //ID
 	Name     string //名称
@@ -28,8 +30,17 @@ type User struct {
 	Email    string //
 	Phone    string //电话
 }
+
 type Score struct {
-	Id       int    //ID
+	Id     int //ID
 	UserId int //用户id
-	Score int //积分
+	Score  int //积分
+}
+
+type ChatGptHistory struct {
+	gorm.Model
+	ChatRoomID       int64  //聊天室ID
+	SenderID         int64  //用户ID
+	Contents         string //内容
+	TheTypeOfMessage string //消息类型
 }
