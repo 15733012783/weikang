@@ -1,6 +1,9 @@
 package consul
 
-import "net"
+import (
+	"fmt"
+	"net"
+)
 
 func GetFreePort() (int, error) {
 	addr, err := net.ResolveTCPAddr("tcp", "localhost:0")
@@ -14,7 +17,7 @@ func GetFreePort() (int, error) {
 	defer func(l *net.TCPListener) {
 		err = l.Close()
 		if err != nil {
-
+			fmt.Println(err)
 		}
 	}(l)
 	return l.Addr().(*net.TCPAddr).Port, nil
