@@ -33,13 +33,6 @@ type ConfigNaCosRpc struct {
 		Host string `json:"host" yaml:"host"`
 		Port string `json:"port" yaml:"port"`
 	} `json:"mongodb" yaml:"mongodb"`
-	AlipaySandbox struct {
-		APPID      string `json:"APPID" yaml:"APPID"`
-		PUBLICKEY  string `json:"PUBLIC_KEY" yaml:"PUBLICKEY"`
-		PRIVATEKEY string `json:"PRIVATE_KEY" yaml:"PRIVATEKEY"`
-		NotifyURL  string `json:"NotifyURL" yaml:"NotifyURL"`
-		ReturnURL  string `json:"ReturnURL" yaml:"ReturnURL"`
-	} `json:"alipaySandbox"`
 }
 
 type ConfigNaCosApi struct {
@@ -79,6 +72,13 @@ type ConfigNaCosApi struct {
 		Username string `json:"Username" yaml:"Username"`
 		Password string `json:"Password" yaml:"Password"`
 	} `json:"mqtt" yaml:"mqtt"`
+	AlipaySandbox struct {
+		APPID      string `json:"APPID" yaml:"APPID"`
+		PUBLICKEY  string `json:"PUBLIC_KEY" yaml:"PUBLICKEY"`
+		PRIVATEKEY string `json:"PRIVATE_KEY" yaml:"PRIVATEKEY"`
+		NotifyURL  string `json:"NotifyURL" yaml:"NotifyURL"`
+		ReturnURL  string `json:"ReturnURL" yaml:"ReturnURL"`
+	} `json:"alipaySandbox"`
 }
 
 func NaCos(DataId, Group, ip string, NamespaceId string) (string, error) {
