@@ -35,14 +35,15 @@ func Pays(orderSnc string, price string) string {
 	var p = alipay.TradeWapPay{}
 	p.NotifyURL = nacos.RpcNac.AlipaySandbox.NotifyURL //设置支付宝异步通知的回调URL，当支付状态发生变化时，支付宝会向该URL发送通知。
 	p.ReturnURL = nacos.RpcNac.AlipaySandbox.ReturnURL //设置支付宝同步通知的回调URL，支付完成后用户将跳转回该URL
-	p.Subject = "支付" + orderSnc                        //标题
+	p.Subject = "支付" + orderSnc                      //标题
 	p.OutTradeNo = orderSnc                            //传递一个唯一单号
 	p.TotalAmount = price                              //金额
 	p.ProductCode = "FAST_INSTANT_TRADE_PAY"           //产品代码
 	currentTime := time.Now()
 	unixTimestamp := currentTime.Unix()
 	p.TimeoutExpress = strconv.FormatInt(unixTimestamp, 10) //设置超时时间，即订单有效期，以Unix时间戳形式表示。
-	p.Body = "描述"                                           //设置订单描述信息。
+
+	p.Body = "描述" //设置订单描述信息。
 	var str, err = client.TradeWapPay(p)
 	if err != nil {
 		fmt.Println(err)
