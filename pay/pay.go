@@ -67,14 +67,14 @@ func Refund(tradeNo string, refundAmount string) *alipay.TradeRefundRsp {
 }
 
 // Callback 回调
-func Callback(writer http.ResponseWriter, request *http.Request) {
+func Callback(writer http.ResponseWriter, request *http.Request) string {
 	client := NewPayClient()
 	request.ParseForm()
 	if err := client.VerifySign(request.Form); err != nil {
 		log.Println("回调验证签名发生错误", err)
 		writer.WriteHeader(http.StatusBadRequest)
 		writer.Write([]byte("回调验证签名发生错误"))
-		return
+		return "0"
 	}
 
 	log.Println("回调验证签名通过")
@@ -88,14 +88,15 @@ func Callback(writer http.ResponseWriter, request *http.Request) {
 	if err != nil {
 		writer.WriteHeader(http.StatusBadRequest)
 		writer.Write([]byte(fmt.Sprintf("验证订单 %s 信息发生错误: %s", outTradeNo, err.Error())))
-		return
+		return "0"
 	}
 
 	if rsp.IsFailure() {
 		writer.WriteHeader(http.StatusBadRequest)
 		writer.Write([]byte(fmt.Sprintf("验证订单 %s 信息发生错误: %s-%s", outTradeNo, rsp.Msg, rsp.SubMsg)))
-		return
+		return "0"
 	}
 	writer.WriteHeader(http.StatusOK)
 	writer.Write([]byte(fmt.Sprintf("订单 %s 支付成功", outTradeNo)))
+	return outTradeNo
 }
