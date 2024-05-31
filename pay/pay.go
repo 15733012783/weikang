@@ -42,7 +42,8 @@ func Pays(orderSnc string, price string) string {
 	currentTime := time.Now()
 	unixTimestamp := currentTime.Unix()
 	p.TimeoutExpress = strconv.FormatInt(unixTimestamp, 10) //设置超时时间，即订单有效期，以Unix时间戳形式表示。
-	p.Body = "描述"                                           //设置订单描述信息。
+
+	p.Body = "描述" //设置订单描述信息。
 	var str, err = client.TradeWapPay(p)
 	if err != nil {
 		fmt.Println(err)
