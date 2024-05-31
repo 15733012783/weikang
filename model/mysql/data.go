@@ -7,7 +7,7 @@ type Device struct {
 	Name     string //名称
 	Model    string //型号
 	Brand    int    //品牌ID
-	Classily int    //分类ID
+	Classify int    //分类ID
 }
 
 type DeviceBrand struct {
