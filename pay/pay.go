@@ -12,11 +12,11 @@ import (
 )
 
 func NewPayClient() *alipay.Client {
-	APP_ID := nacos.RpcNac.AlipaySandbox.APPID
+	APP_ID := nacos.ApiNac.AlipaySandbox.APPID
 	//公钥
-	PUBLIC_KEY := nacos.RpcNac.AlipaySandbox.PUBLICKEY
+	PUBLIC_KEY := nacos.ApiNac.AlipaySandbox.PUBLICKEY
 	//私钥
-	PRIVATE_KEY := nacos.RpcNac.AlipaySandbox.PRIVATEKEY
+	PRIVATE_KEY := nacos.ApiNac.AlipaySandbox.PRIVATEKEY
 
 	var client, err = alipay.New(APP_ID, PRIVATE_KEY, false)
 	if err != nil {
@@ -33,8 +33,8 @@ func NewPayClient() *alipay.Client {
 func Pays(orderSnc string, price string) string {
 	client := NewPayClient()
 	var p = alipay.TradeWapPay{}
-	p.NotifyURL = nacos.RpcNac.AlipaySandbox.NotifyURL //设置支付宝异步通知的回调URL，当支付状态发生变化时，支付宝会向该URL发送通知。
-	p.ReturnURL = nacos.RpcNac.AlipaySandbox.ReturnURL //设置支付宝同步通知的回调URL，支付完成后用户将跳转回该URL
+	p.NotifyURL = nacos.ApiNac.AlipaySandbox.NotifyURL //设置支付宝异步通知的回调URL，当支付状态发生变化时，支付宝会向该URL发送通知。
+	p.ReturnURL = nacos.ApiNac.AlipaySandbox.ReturnURL //设置支付宝同步通知的回调URL，支付完成后用户将跳转回该URL
 	p.Subject = "支付" + orderSnc                        //标题
 	p.OutTradeNo = orderSnc                            //传递一个唯一单号
 	p.TotalAmount = price                              //金额
