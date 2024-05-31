@@ -33,6 +33,13 @@ type ConfigNaCosRpc struct {
 		Host string `json:"host" yaml:"host"`
 		Port string `json:"port" yaml:"port"`
 	} `json:"mongodb" yaml:"mongodb"`
+	AlipaySandbox struct {
+		APPID      string `json:"APPID" yaml:"APPID"`
+		PUBLICKEY  string `json:"PUBLIC_KEY" yaml:"PUBLICKEY"`
+		PRIVATEKEY string `json:"PRIVATE_KEY" yaml:"PRIVATEKEY"`
+		NotifyURL  string `json:"NotifyURL" yaml:"NotifyURL"`
+		ReturnURL  string `json:"ReturnURL" yaml:"ReturnURL"`
+	} `json:"alipaySandbox"`
 }
 
 type ConfigNaCosApi struct {

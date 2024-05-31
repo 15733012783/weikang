@@ -3,7 +3,6 @@ module github.com/15733012783/weikang
 go 1.20
 
 require (
-	github.com/15733012783/mysql v0.0.0-20240521012948-cba4a99b629f
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/eclipse/paho.mqtt.golang v1.4.3
 	github.com/fsnotify/fsnotify v1.7.0
@@ -16,6 +15,7 @@ require (
 	github.com/mervick/aes-everywhere/go/aes256 v0.0.0-20240228221001-33356df39cf4
 	github.com/nacos-group/nacos-sdk-go v1.1.4
 	github.com/olivere/elastic/v7 v7.0.32
+	github.com/smartwalle/alipay/v3 v3.2.21
 	github.com/spf13/viper v1.18.2
 	go.mongodb.org/mongo-driver v1.15.0
 	google.golang.org/grpc v1.64.0
@@ -65,6 +65,9 @@ require (
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/sagikazarmark/locafero v0.4.0 // indirect
 	github.com/sagikazarmark/slog-shim v0.1.0 // indirect
+	github.com/smartwalle/ncrypto v1.0.4 // indirect
+	github.com/smartwalle/ngx v1.0.9 // indirect
+	github.com/smartwalle/nsign v1.0.9 // indirect
 	github.com/sourcegraph/conc v0.3.0 // indirect
 	github.com/spf13/afero v1.11.0 // indirect
 	github.com/spf13/cast v1.6.0 // indirect
