@@ -74,11 +74,11 @@ type ConfigNaCosApi struct {
 	} `json:"mqtt" yaml:"mqtt"`
 	AlipaySandbox struct {
 		APPID      string `json:"APPID" yaml:"APPID"`
-		PUBLICKEY  string `json:"PUBLIC_KEY" yaml:"PUBLICKEY"`
-		PRIVATEKEY string `json:"PRIVATE_KEY" yaml:"PRIVATEKEY"`
+		PUBLICKEY  string `json:"PUBLIC_KEY" yaml:"PUBLIC_KEY"`
+		PRIVATEKEY string `json:"PRIVATE_KEY" yaml:"PRIVATE_KEY"`
 		NotifyURL  string `json:"NotifyURL" yaml:"NotifyURL"`
 		ReturnURL  string `json:"ReturnURL" yaml:"ReturnURL"`
-	} `json:"alipaySandbox"`
+	} `json:"alipaySandbox" yaml:"alipaySandbox"`
 }
 
 func NaCos(DataId, Group, ip string, NamespaceId string) (string, error) {
