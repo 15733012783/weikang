@@ -44,3 +44,13 @@ type ChatGptHistory struct {
 	Contents         string //内容
 	TheTypeOfMessage string //消息类型
 }
+
+type Goods struct {
+	gorm.Model
+	GoodsName   string  `gorm:"type:varchar(50)"`
+	GoodsPrice  float64 `gorm:"type:decimal(10,2)"`
+	GoodsStock  int64   `gorm:"type:int(5)"`
+	GoodsType   string  `gorm:"type:varchar(255)"`
+	Description string  `gorm:"type:varchar(255)"`
+	PageView    int64   `gorm:"type:int(5)"`
+}

@@ -30,7 +30,7 @@ func NewPayClient() *alipay.Client {
 	return client
 }
 
-func Pays(orderSnc string, price string) string {
+func Pays(orderSnc string, price string) (string, error) {
 	client := NewPayClient()
 	var p = alipay.TradeWapPay{}
 	p.NotifyURL = nacos.ApiNac.AlipaySandbox.NotifyURL //设置支付宝异步通知的回调URL，当支付状态发生变化时，支付宝会向该URL发送通知。
@@ -45,11 +45,11 @@ func Pays(orderSnc string, price string) string {
 	p.Body = "描述"                                           //设置订单描述信息。
 	var str, err = client.TradeWapPay(p)
 	if err != nil {
-		fmt.Println(err)
+		return "", err
 	}
 	// 这个 payURL 即是用于打开支付宝支付页面的 URL，可将输出的内容复制，到浏览器中访问该 URL 即可打开支付页面。
 	fmt.Println(str.String())
-	return str.String()
+	return str.String(), nil
 }
 
 // Refund 退款
