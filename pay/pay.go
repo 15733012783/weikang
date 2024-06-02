@@ -53,16 +53,16 @@ func Pays(orderSnc string, price string) (string, error) {
 }
 
 // Refund 退款
-func Refund(tradeNo string, refundAmount string) *alipay.TradeRefundRsp {
+func Refund(tradeNo string, refundAmount string) (*alipay.TradeRefundRsp, error) {
 	client := NewPayClient()
 	var p = alipay.TradeRefund{}
 	p.RefundAmount = refundAmount
 	p.TradeNo = tradeNo
 	refunds, err := client.TradeRefund(context.Background(), p)
 	if err != nil {
-		return nil
+		return nil, err
 	}
-	return refunds
+	return refunds, nil
 }
 
 // Callback 回调

@@ -1,6 +1,9 @@
 package mysql
 
-import "gorm.io/gorm"
+import (
+	"gorm.io/gorm"
+	"time"
+)
 
 type Device struct {
 	Id       int    //ID
@@ -55,11 +58,15 @@ type Goods struct {
 	PageView    int64   `gorm:"type:int(5)"`
 }
 
-type Order struct {
-	gorm.Model
-	OrderNo string `json:"order_no" gorm:"type:varchar(50)"`
-	UserId  int64  `json:"user_id" gorm:"type:int(3)"`
-	PayType int64  `json:"pay_type" gorm:"type:int(3)"`
-	Status  int64  `json:"status" gorm:"type:int(3)"`
-	Num     int64  `json:"num" gorm:"type:int(3)"`
+type Orders struct {
+	ID          int
+	GoodsID     int
+	OrderID     int
+	UserID      int
+	OrderNumber string
+	Status      int8
+	TotalPrice  string
+	Payment     string
+	Address     string
+	OrderAt     time.Time
 }
