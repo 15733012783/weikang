@@ -75,9 +75,7 @@ func Callback(writer http.ResponseWriter, request *http.Request) string {
 		writer.Write([]byte("回调验证签名发生错误"))
 		return "0"
 	}
-
 	log.Println("回调验证签名通过")
-
 	// 示例一：使用已有接口进行查询
 	var outTradeNo = request.Form.Get("out_trade_no")
 	var p = alipay.TradeQuery{}
@@ -93,9 +91,11 @@ func Callback(writer http.ResponseWriter, request *http.Request) string {
 	if rsp.IsFailure() {
 		writer.WriteHeader(http.StatusBadRequest)
 		writer.Write([]byte(fmt.Sprintf("验证订单 %s 信息发生错误: %s-%s", outTradeNo, rsp.Msg, rsp.SubMsg)))
-		return "0"
 	}
 	writer.WriteHeader(http.StatusOK)
-	writer.Write([]byte(fmt.Sprintf("订单 %s 支付成功", outTradeNo)))
+	_, err = writer.Write([]byte(fmt.Sprintf("订单 %s 支付成功", outTradeNo)))
+	if err != nil {
+		return "0"
+	}
 	return outTradeNo
 }

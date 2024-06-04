@@ -68,5 +68,6 @@ type Orders struct {
 	TotalPrice  string
 	Payment     string
 	Address     string
+	Quantity    int
 	OrderAt     time.Time
 }
