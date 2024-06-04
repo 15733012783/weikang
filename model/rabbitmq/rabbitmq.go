@@ -120,7 +120,7 @@ func (r *RabbitMQ) ConsumeSimple() <-chan amqp.Delivery {
 		true, // auto-ack
 		//是否独有
 		false, // exclusive
-		//设置为true，表示 不能将同一个Conenction中生产者发送的消息传递给这个Connection中 的消费者
+		//设置为true，表示 不能将同一个Connection中生产者发送的消息传递给这个Connection中 的消费者
 		false, // no-local
 		//列是否阻塞
 		false, // no-wait
