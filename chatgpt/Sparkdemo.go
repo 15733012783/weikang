@@ -29,7 +29,7 @@ var (
 	apiKey    = nacos.ApiNac.Chatgpt.ApiKey
 )
 
-func XfChatGrpc(text string) string {
+func XfChatGrpc(text string) (string, error) {
 	// fmt.Println(HmacWithShaTobase64("hmac-sha256", "hello\nhello", "hello"))
 	// st := time.Now()
 	d := websocket.Dialer{
@@ -38,8 +38,7 @@ func XfChatGrpc(text string) string {
 	//握手并建立websocket 连接
 	conn, resp, err := d.Dial(assembleAuthUrl1(hostUrl, apiKey, apiSecret), nil)
 	if err != nil {
-		panic(readResp(resp) + err.Error())
-		return ""
+		return "", err
 	} else if resp.StatusCode != 101 {
 		panic(readResp(resp) + err.Error())
 	}
@@ -64,7 +63,7 @@ func XfChatGrpc(text string) string {
 		err1 := json.Unmarshal(msg, &data)
 		if err1 != nil {
 			fmt.Println("Error parsing JSON:", err)
-			return ""
+			return "", err1
 		}
 		fmt.Println(string(msg))
 		//解析数据
@@ -75,7 +74,7 @@ func XfChatGrpc(text string) string {
 
 		if code != 0 {
 			fmt.Println(data["payload"])
-			return ""
+			return "", nil
 		}
 		status := choices["status"].(float64)
 		fmt.Println(status)
@@ -99,7 +98,7 @@ func XfChatGrpc(text string) string {
 	fmt.Println(answer)
 
 	time.Sleep(1 * time.Second)
-	return answer
+	return answer, nil
 }
 
 // 生成参数
