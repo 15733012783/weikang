@@ -6,6 +6,7 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
+	"github.com/15733012783/weikang/nacos"
 	"io/ioutil"
 	"net/http"
 	"net/url"
@@ -21,18 +22,11 @@ import (
  * @author iflytek
  */
 
-//var (
-//	hostUrl   = nacos.ApiNac.Chatgpt.HostUrl
-//	appid     = nacos.ApiNac.Chatgpt.Appid
-//	apiSecret = nacos.ApiNac.Chatgpt.ApiSecret
-//	apiKey    = nacos.ApiNac.Chatgpt.ApiKey
-//)
-
 var (
-	hostUrl   = "wss://spark-api.xf-yun.com/v3.5/chat"
-	appid     = "ab887b4a"
-	apiSecret = "MzBhYjcyMmIxNjM0MmVhOTA0OWE0YWQ1"
-	apiKey    = "3aab5bf3a0e884e582380bd01f275fe2"
+	hostUrl   = nacos.ApiNac.Chatgpt.HostUrl
+	appid     = nacos.ApiNac.Chatgpt.Appid
+	apiSecret = nacos.ApiNac.Chatgpt.ApiSecret
+	apiKey    = nacos.ApiNac.Chatgpt.ApiKey
 )
 
 func XfChatGrpc(text string) (string, error) {
