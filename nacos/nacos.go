@@ -60,10 +60,10 @@ type ConfigNaCosApi struct {
 		Endpoint        string `json:"endpoint" yaml:"endpoint"`
 	} `json:"ali" yaml:"ali"`
 	Chatgpt struct {
-		HostUrl   string `json:"hostUrl" yaml:"HostUrl"`
-		Appid     string `json:"appid" yaml:"Appid"`
-		ApiSecret string `json:"apiSecret" yaml:"ApiSecret"`
-		ApiKey    string `json:"apiKey" yaml:"ApiKey"`
+		HostUrl   string `json:"hostUrl" yaml:"hostUrl"`
+		Appid     string `json:"appid" yaml:"appid"`
+		ApiSecret string `json:"apiSecret" yaml:"apiSecret"`
+		ApiKey    string `json:"apiKey" yaml:"apiKey"`
 	} `json:"chatgpt" yaml:"chatgpt"`
 	Mqtt struct {
 		Broker   string `json:"Broker" yaml:"Broker"`
