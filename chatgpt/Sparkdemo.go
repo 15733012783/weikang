@@ -22,8 +22,15 @@ import (
  * @author iflytek
  */
 
+//var (
+//	hostUrl   = nacos.ApiNac.Chatgpt.HostUrl
+//	appid     = nacos.ApiNac.Chatgpt.Appid
+//	apiSecret = nacos.ApiNac.Chatgpt.ApiSecret
+//	apiKey    = nacos.ApiNac.Chatgpt.ApiKey
+//)
+
 var (
-	hostUrl   = nacos.ApiNac.Chatgpt.HostUrl
+	hostUrl   = "wss://spark-api.xf-yun.com/v3.5/chat"
 	appid     = nacos.ApiNac.Chatgpt.Appid
 	apiSecret = nacos.ApiNac.Chatgpt.ApiSecret
 	apiKey    = nacos.ApiNac.Chatgpt.ApiKey
