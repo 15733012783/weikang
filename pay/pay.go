@@ -18,7 +18,7 @@ func NewPayClient() *alipay.Client {
 	//私钥
 	PRIVATE_KEY := nacos.ApiNac.AlipaySandbox.PRIVATEKEY
 
-	var client, err = alipay.New(APP_ID, PRIVATE_KEY, false)
+	var client, err = alipay.New(APP_ID, PRIVATE_KEY, true)
 	if err != nil {
 		fmt.Println(err)
 		return nil

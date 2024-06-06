@@ -8,7 +8,8 @@ import (
 func InitRedis(callback func(db *redis.Client) (interface{}, error)) (interface{}, error) {
 	nac := nacos.RpcNac.Redis
 	rdb := redis.NewClient(&redis.Options{
-		Addr: nac.Addr,
+		Addr:     nac.Addr,
+		Password: nac.Password,
 	})
 	i, err := callback(rdb)
 	if err != nil {
