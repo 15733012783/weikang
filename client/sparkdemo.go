@@ -1,4 +1,4 @@
-package chatgpt
+package client
 
 import (
 	"crypto/hmac"
@@ -21,21 +21,14 @@ import (
  * @author iflytek
  */
 
-//var (
-//	hostUrl   = nacos.ApiNac.Chatgpt.HostUrl
-//	appid     = nacos.ApiNac.Chatgpt.Appid
-//	apiSecret = nacos.ApiNac.Chatgpt.ApiSecret
-//	apiKey    = nacos.ApiNac.Chatgpt.ApiKey
-//)
-
 var (
-	hostUrl   = "wss://spark-api.xf-yun.com/v3.5/chat"
-	appid     = "ab887b4a"
-	apiSecret = "MzBhYjcyMmIxNjM0MmVhOTA0OWE0YWQ1"
-	apiKey    = "3aab5bf3a0e884e582380bd01f275fe2"
+	hostUrl   = "wss://aichat.xf-yun.com/v1/chat"
+	appid     = "XXXXXXXX"
+	apiSecret = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+	apiKey    = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 )
 
-func XfChatGrpc(text string) (string, error) {
+func main() {
 	// fmt.Println(HmacWithShaTobase64("hmac-sha256", "hello\nhello", "hello"))
 	// st := time.Now()
 	d := websocket.Dialer{
@@ -44,14 +37,15 @@ func XfChatGrpc(text string) (string, error) {
 	//握手并建立websocket 连接
 	conn, resp, err := d.Dial(assembleAuthUrl1(hostUrl, apiKey, apiSecret), nil)
 	if err != nil {
-		return "", err
+		panic(readResp(resp) + err.Error())
+		return
 	} else if resp.StatusCode != 101 {
 		panic(readResp(resp) + err.Error())
 	}
 
 	go func() {
 
-		data := genParams1(appid, text)
+		data := genParams1(appid, "你是谁，可以干什么？")
 		conn.WriteJSON(data)
 
 	}()
@@ -69,7 +63,7 @@ func XfChatGrpc(text string) (string, error) {
 		err1 := json.Unmarshal(msg, &data)
 		if err1 != nil {
 			fmt.Println("Error parsing JSON:", err)
-			return "", err1
+			return
 		}
 		fmt.Println(string(msg))
 		//解析数据
@@ -80,7 +74,7 @@ func XfChatGrpc(text string) (string, error) {
 
 		if code != 0 {
 			fmt.Println(data["payload"])
-			return "", nil
+			return
 		}
 		status := choices["status"].(float64)
 		fmt.Println(status)
@@ -104,7 +98,6 @@ func XfChatGrpc(text string) (string, error) {
 	fmt.Println(answer)
 
 	time.Sleep(1 * time.Second)
-	return answer, nil
 }
 
 // 生成参数
@@ -120,11 +113,11 @@ func genParams1(appid, question string) map[string]interface{} { // 根据实际
 		},
 		"parameter": map[string]interface{}{ // 根据实际情况修改返回的数据结构和字段名
 			"chat": map[string]interface{}{ // 根据实际情况修改返回的数据结构和字段名
-				"domain":      "generalv3.5", // 根据实际情况修改返回的数据结构和字段名
-				"temperature": float64(0.8),  // 根据实际情况修改返回的数据结构和字段名
-				"top_k":       int64(6),      // 根据实际情况修改返回的数据结构和字段名
-				"max_tokens":  int64(2048),   // 根据实际情况修改返回的数据结构和字段名
-				"auditing":    "default",     // 根据实际情况修改返回的数据结构和字段名
+				"domain":      "general",    // 根据实际情况修改返回的数据结构和字段名
+				"temperature": float64(0.8), // 根据实际情况修改返回的数据结构和字段名
+				"top_k":       int64(6),     // 根据实际情况修改返回的数据结构和字段名
+				"max_tokens":  int64(2048),  // 根据实际情况修改返回的数据结构和字段名
+				"auditing":    "default",    // 根据实际情况修改返回的数据结构和字段名
 			},
 		},
 		"payload": map[string]interface{}{ // 根据实际情况修改返回的数据结构和字段名
